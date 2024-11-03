@@ -6,8 +6,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     int _healthPoints = 100;
-    int _walkingSpeed = 3;
-    int _runningSpeed = 6;
+    float _walkingSpeed = 1.5f;
+    float _runningSpeed = 3f;
     Rigidbody2D _rigidBody;
     AudioSource _audioSource;
 
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     int _morale = 0;
     int _discipline = 0;
 
-    void Start()
+    void Awake()
     {
         _rigidBody = gameObject.GetComponent<Rigidbody2D>();
         _audioSource = gameObject.GetComponent<AudioSource>();
@@ -28,59 +28,68 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
-    void FixedUpdate(){
-        if(Input.GetKey(KeyCode.LeftShift)){ Run(); }
-        else{ Walk(); }
+    void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.LeftShift)) Run();
+        else Walk();
     }
 
-#region Movement
-    private void Walk(){
+    #region Movement
+    private void Walk()
+    {
         _rigidBody.MovePosition(_rigidBody.position + GetMovementDirection() * _walkingSpeed * Time.deltaTime);
         WalkSound();
     }
 
-    private void Run(){
+    private void Run()
+    {
         _rigidBody.MovePosition(_rigidBody.position + GetMovementDirection() * _runningSpeed * Time.deltaTime);
         WalkSound();
     }
 
-    void WalkSound(){
-        if (GetMovementDirection() != Vector2.zero){
-            if (!_audioSource.isPlaying){
+    void WalkSound()
+    {
+        if (GetMovementDirection() != Vector2.zero)
+        {
+            if (!_audioSource.isPlaying)
                 _audioSource.Play();
-            }
         }
-        else{
-            if (_audioSource.isPlaying){
+        else
+        {
+            if (_audioSource.isPlaying)
                 _audioSource.Stop();
-            }
         }
     }
 
-#endregion
+    #endregion
 
-#region Damage
+    #region Damage
     public void TakeDamage(int damageAmount)
     {
         int finalDamage = Mathf.Max(damageAmount - _defense, 0);
         _healthPoints -= finalDamage;
 
-        if (_healthPoints <= 0){
+        if (_healthPoints <= 0)
+        {
             // Implementar lógica de Game Over
         }
     }
 
-#endregion
+    #endregion
 
-    public void DisplayStats(){
+    public void DisplayStats()
+    {
         Debug.Log($"Health: {_healthPoints}, Strength: {_strength}, Speed: {_speed}, Agility: {_agility}, " +
                   $"Defense: {_defense}, Attack: {_attack}, Morale: {_morale}, Discipline: {_discipline}");
     }
 
-    public Vector2 GetMovementDirection(){
-        return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+    public Vector2 GetMovementDirection()
+    {
+        var move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        move.Normalize();
+        return move;
     }
 }
