@@ -369,11 +369,11 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/Features/Util/Scripts/Battle/EnemyBattleSystem.cs"
+"Assets/Features/Util/Scripts/Battle/PlayerBattleSystem.cs"
 "Assets/Features/Util/Scripts/EnemyArea.cs"
-"Assets/Features/Util/Scripts/EnemyBattleSystem.cs"
 "Assets/Features/Util/Scripts/LevelController.cs"
 "Assets/Features/Util/Scripts/Player.cs"
-"Assets/Features/Util/Scripts/PlayerBattleSystem.cs"
 -langversion:9.0
 /deterministic
 /optimize+

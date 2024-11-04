@@ -29,12 +29,8 @@ public class Player : MonoBehaviour
     }
 
     void FixedUpdate(){
-        if(Input.GetKey(KeyCode.LeftShift)){
-            Run();
-        }
-        else{
-            Walk();
-        }
+        if(Input.GetKey(KeyCode.LeftShift)) Run();
+        else Walk();
     }
 
 #region Movement
@@ -47,21 +43,15 @@ public class Player : MonoBehaviour
         _rigidBody.MovePosition(_rigidBody.position + GetMovementDirection() * _runningSpeed * Time.deltaTime);
         WalkSound();
 
-        if(GetMovementDirection() != Vector2.zero){
-            _speedXP += 10f * Time.deltaTime;
-        }
+        if(GetMovementDirection() != Vector2.zero) _speedXP += 10f * Time.deltaTime;
     }
 
     void WalkSound(){
         if (GetMovementDirection() != Vector2.zero){
-            if (!_audioSource.isPlaying){
-                _audioSource.Play();
-            }
+            if (!_audioSource.isPlaying) _audioSource.Play();
         }
         else{
-            if (_audioSource.isPlaying){
-                _audioSource.Stop();
-            }
+            if (_audioSource.isPlaying) _audioSource.Stop();
         }
     }
 
