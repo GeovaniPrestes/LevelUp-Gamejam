@@ -1,22 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Features.Util.Scripts;
+using Assets.Features.Util.Scripts.Interfaces;
+using Assets.Features.Util.Scripts.Models;
 using UnityEngine;
-using Interfaces;
 
-public class NpcFeliciaController : MonoBehaviour, INpcController
+namespace Assets.Features.Npcs.Felicia.Scripts
 {
-    void Start()
+    public class NpcFeliciaController : MonoBehaviour, IInteractableController
     {
+        [SerializeField] private DialogModel _dialog;
 
-    }
-
-    void Update()
-    {
-
-    }
-
-    public void Interact()
-    {
-        Debug.Log("Olá");
+        public void Interact()
+        {
+            DialogManager.Instance.ShowDialog(_dialog);
+        }
     }
 }

@@ -1,27 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Features.Util.Scripts.Interfaces;
 using UnityEngine;
-using Interfaces;
 
-public class GenericNpcController : MonoBehaviour, INpcController
+namespace Assets.Features.Npcs.Scripts.Controllers
 {
-    [SerializeField] private string[] _lowMoralLines;
-    [SerializeField] private string[] _mediumMoralLines;
-    [SerializeField] private string[] _highMoralLines;
-
-    void Start()
+    public class GenericNpcController : MonoBehaviour, IInteractableController
     {
+        [SerializeField] private string[] _lowMoralLines;
+        [SerializeField] private string[] _mediumMoralLines;
+        [SerializeField] private string[] _highMoralLines;
 
-    }
+        void Start()
+        {
 
-    // Update is called once per frame
-    void Update()
-    {
+        }
 
-    }
+        // Update is called once per frame
+        void Update()
+        {
 
-    public void Interact()
-    {
+        }
 
+        public void Interact()
+        {
+
+        }
     }
 }

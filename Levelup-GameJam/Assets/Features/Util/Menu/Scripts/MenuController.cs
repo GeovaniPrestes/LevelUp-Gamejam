@@ -1,53 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MenuController : MonoBehaviour
+namespace Assets.Features.Util.Menu.Scripts
 {
-    [SerializeField] private string _sceneName;
-    [SerializeField] public Animator animator;  
+    public class MenuController : MonoBehaviour
+    {
+        [SerializeField] private string _sceneName;
+        [SerializeField] public Animator Animator;  
     
-    public string animationTriggerName = "LogoAnimation";  
-    public float minInterval = 5f; 
-    public float maxInterval = 10f; 
+        public string AnimationTriggerName = "LogoAnimation";  
+        public float MinInterval = 5f; 
+        public float MaxInterval = 10f; 
 
-    private void Start()
-    {
-        StartCoroutine(PlayAnimationWithRandomInterval());
-    }
-
-    private System.Collections.IEnumerator PlayAnimationWithRandomInterval()
-    {
-        while (true)
+        private void Start()
         {
-            float interval = Random.Range(minInterval, maxInterval);
-            Debug.Log(interval);
-            yield return new WaitForSeconds(interval);
-            animator.SetTrigger(animationTriggerName);
+            StartCoroutine(PlayAnimationWithRandomInterval());
         }
-    }
 
-    public void StartGame() =>
-        SceneManager.LoadScene(_sceneName);
+        private System.Collections.IEnumerator PlayAnimationWithRandomInterval()
+        {
+            while (true)
+            {
+                float interval = Random.Range(MinInterval, MaxInterval);
+                Debug.Log(interval);
+                yield return new WaitForSeconds(interval);
+                Animator.SetTrigger(AnimationTriggerName);
+            }
+        }
 
-    public void OpenCredits()
-    {
+        public void StartGame() =>
+            SceneManager.LoadScene(_sceneName);
 
-    }
+        public void OpenCredits()
+        {
 
-    public void OpenHelp()
-    {
+        }
 
-    }
+        public void OpenHelp()
+        {
 
-    public void QuitGame()
-    {
+        }
+
+        public void QuitGame()
+        {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif
+        }
     }
 }

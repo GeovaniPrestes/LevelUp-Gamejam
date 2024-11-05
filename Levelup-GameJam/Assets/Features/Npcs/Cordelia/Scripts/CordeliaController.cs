@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Features.Util.Scripts.Interfaces;
 using UnityEngine;
-using Interfaces;
 
-public class CordeliaController : MonoBehaviour, INpcController
+namespace Assets.Features.Npcs.Cordelia.Scripts
 {
-    void Start()
+    public class CordeliaController : MonoBehaviour, IInteractableController
     {
+        void Start()
+        {
         
-    }
+        }
 
-    void Update()
-    {
+        void Update()
+        {
         
-    }
+        }
 
-    public void Interact()
-    {
+        public void Interact()
+        {
 
+        }
     }
 }

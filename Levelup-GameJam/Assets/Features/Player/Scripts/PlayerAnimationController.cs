@@ -1,45 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Features.Util.Scripts.Interfaces;
 using UnityEngine;
-using Interfaces;
 
-public class PlayerAnimationController : MonoBehaviour
+namespace Assets.Features.Player.Scripts
 {
-    private Animator _animator;
-    private Vector2 _input;
-    [SerializeField] private LayerMask _interactableLayer;
-
-    void Awake()
+    public class PlayerAnimationController : MonoBehaviour
     {
-        _animator = GetComponent<Animator>();
-    }
-    
-    void Update()
-    {
-        _input.x = Input.GetAxisRaw("Horizontal");
-        _input.y = Input.GetAxisRaw("Vertical");
+        private Animator _animator;
+        private Vector2 _input;
+        [SerializeField] private LayerMask _interactableLayer;
 
-        _animator.SetBool("isWalking", _input != Vector2.zero);
+        void Awake() => _animator = GetComponent<Animator>();
 
-        if (_input == Vector2.zero) return;
+        public void HandleUpdate()
+        {
+            _input.x = Input.GetAxisRaw("Horizontal");
+            _input.y = Input.GetAxisRaw("Vertical");
 
-        _animator.SetFloat("moveX", _input.x);
-        _animator.SetFloat("moveY", _input.y);
-    }
+            _animator.SetBool("isWalking", _input != Vector2.zero);
 
-    void FixedUpdate()
-    {
-        if (Input.GetKey(KeyCode.Z))
-            Interact();
-    }
+            if (_input == Vector2.zero) return;
 
-    private void Interact()
-    {
-        var facingDir = new Vector3(_animator.GetFloat("moveX"), _animator.GetFloat("moveY"));
-        var interactPos = transform.position + facingDir * 0.2f;
-        var collider = Physics2D.OverlapCircle(interactPos, 0.2f, _interactableLayer);
+            _animator.SetFloat("moveX", _input.x);
+            _animator.SetFloat("moveY", _input.y);
+        }
 
-        if (collider != null)
-            collider.GetComponent<INpcController>()?.Interact();
+        void FixedUpdate()
+        {
+            if (Input.GetKey(KeyCode.Z))
+                Interact();
+        }
+
+        private void Interact()
+        {
+            var facingDir = new Vector3(_animator.GetFloat("moveX"), _animator.GetFloat("moveY"));
+            var interactPos = transform.position + facingDir * 0.2f;
+            var overlapCircle = Physics2D.OverlapCircle(interactPos, 0.2f, _interactableLayer);
+
+            if (overlapCircle != null)
+                overlapCircle.GetComponent<IInteractableController>()?.Interact();
+        }
     }
 }

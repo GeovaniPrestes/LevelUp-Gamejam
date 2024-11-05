@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Assets.Features.Util.Scripts.Interfaces;
 
-namespace Interfaces
+namespace Assets.Features.Npcs.Scripts.Interfaces
 {
-    public interface IShopController : INpcController
+    public interface IShopController : IInteractableController
     {
         void OpenWindow();
     }
 }
-
