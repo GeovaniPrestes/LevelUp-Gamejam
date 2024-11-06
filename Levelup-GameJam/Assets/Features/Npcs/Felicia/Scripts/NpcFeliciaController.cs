@@ -9,9 +9,6 @@ namespace Assets.Features.Npcs.Felicia.Scripts
     {
         [SerializeField] private DialogModel _dialog;
 
-        public void Interact()
-        {
-            DialogManager.Instance.ShowDialog(_dialog);
-        }
+        public void Interact() => DialogManager.Instance.ShowDialog(_dialog);
     }
 }

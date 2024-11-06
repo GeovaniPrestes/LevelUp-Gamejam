@@ -17,9 +17,12 @@ namespace Assets.Features.Util.Scripts
 
         void Update()
         {
+            if (Input.GetKey(KeyCode.Escape))
+                DialogManager.Instance.CloseDialog();
+
             if (_state == GameState.FreeRoam)
             {
-                _playerController.HandleUpdate();
+                
             }
             else if (_state == GameState.Pause)
             {
@@ -27,8 +30,7 @@ namespace Assets.Features.Util.Scripts
             }
             else if (_state == GameState.Dialog)
             {
-                if (Input.GetKey(KeyCode.Escape))
-                    DialogManager.Instance.CloseDialog();
+                
             }
         }
 

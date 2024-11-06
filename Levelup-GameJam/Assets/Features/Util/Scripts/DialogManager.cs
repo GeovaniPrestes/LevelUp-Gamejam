@@ -1,5 +1,7 @@
+using System;
 using Assets.Features.Util.Scripts.Models;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +10,8 @@ namespace Assets.Features.Util.Scripts
     public class DialogManager : MonoBehaviour
     {
         [SerializeField] private GameObject _dialogBox;
+        [SerializeField] private GameObject _portraitGameObject;
+        [SerializeField] private Image _portraitImage;
         [SerializeField] private Text _dialogText;
         [SerializeField] private int _lettersPerSecond;
 
@@ -20,6 +24,11 @@ namespace Assets.Features.Util.Scripts
         public void ShowDialog(DialogModel dialog)
         {
             _dialogBox.SetActive(true);
+
+            if (dialog.hasPortrait) _portraitImage.sprite = dialog.PortraitImage;
+
+            _portraitGameObject.SetActive(dialog.hasPortrait);
+
             if (_typingCoroutine != null)
                 StopCoroutine(_typingCoroutine);
 
