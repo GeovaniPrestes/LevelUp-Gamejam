@@ -10,10 +10,11 @@ namespace Assets.Features.Util.Scripts.Models
     {
         [SerializeField] private string _npcName;
         [SerializeField] private List<string> _lines;
-        [SerializeField] private Sprite _portraitImage;
+        [SerializeField] private List<Sprite> _portraitImage;
         [SerializeField] public bool hasPortrait;
 
         public List<string> Lines => _lines;
-        public Sprite PortraitImage => _portraitImage;
+        public List<Sprite> PortraitImage => _portraitImage;
+        public string NpcName => _npcName;
     }
 }

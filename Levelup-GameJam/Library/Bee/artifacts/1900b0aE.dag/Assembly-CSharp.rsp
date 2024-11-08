@@ -378,6 +378,7 @@
 "Assets/Features/Util/Scripts/EnemyBattleSystem.cs"
 "Assets/Features/Util/Scripts/GameController.cs"
 "Assets/Features/Util/Scripts/Interfaces/IInteractableController.cs"
+"Assets/Features/Util/Scripts/Interfaces/NpcPortraitEnum.cs"
 "Assets/Features/Util/Scripts/LevelController.cs"
 "Assets/Features/Util/Scripts/Models/DialogModel.cs"
 "Assets/Features/Util/Scripts/Player.cs"

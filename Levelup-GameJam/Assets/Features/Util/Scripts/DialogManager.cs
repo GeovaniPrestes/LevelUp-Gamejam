@@ -1,7 +1,5 @@
-using System;
 using Assets.Features.Util.Scripts.Models;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +12,8 @@ namespace Assets.Features.Util.Scripts
         [SerializeField] private Image _portraitImage;
         [SerializeField] private Text _dialogText;
         [SerializeField] private int _lettersPerSecond;
+        private DialogModel _actualDialog;
+        private int _actualDialogLine = 0;
 
         private Coroutine _typingCoroutine;
 
@@ -23,19 +23,38 @@ namespace Assets.Features.Util.Scripts
 
         public void ShowDialog(DialogModel dialog)
         {
+            if (dialog.Lines[_actualDialogLine].Equals(_dialogText.text)) ShowNextLine();
+
+            _portraitGameObject.SetActive(false);
             _dialogBox.SetActive(true);
+            FindObjectOfType<GameController>()?.SetGameState(GameState.Dialog);
 
-            if (dialog.hasPortrait) _portraitImage.sprite = dialog.PortraitImage;
-
-            _portraitGameObject.SetActive(dialog.hasPortrait);
+            _actualDialog = dialog;
 
             if (_typingCoroutine != null)
                 StopCoroutine(_typingCoroutine);
 
-            _typingCoroutine = StartCoroutine(TypeDialog(dialog.Lines[0]));
+            _typingCoroutine = StartCoroutine(TypeDialog(dialog.Lines[_actualDialogLine]));
         }
 
-        public void CloseDialog() => _dialogBox.SetActive(false);
+        public bool IsActive() => _dialogBox.activeSelf;
+
+        public  void CloseDialog()
+        {
+            _dialogBox.SetActive(false);
+            _actualDialogLine = 0;
+            FindObjectOfType<GameController>()?.SetGameState(GameState.FreeRoam);
+        }
+
+        public  void ShowNextLine()
+        {
+            if (_typingCoroutine is not null) return;
+            
+            _actualDialogLine++;
+
+            if (_actualDialogLine == _actualDialog.Lines.Count) CloseDialog();
+            else ShowDialog(_actualDialog);
+        }
 
         public IEnumerator TypeDialog(string line)
         {

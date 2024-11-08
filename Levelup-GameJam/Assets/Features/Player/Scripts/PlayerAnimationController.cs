@@ -11,8 +11,10 @@ namespace Assets.Features.Player.Scripts
 
         void Awake() => _animator = GetComponent<Animator>();
 
-        void FixedUpdate()
+        public void HandleUpdate()
         {
+            if (Input.GetKeyDown(KeyCode.Z)) Interact();
+
             _input.x = Input.GetAxisRaw("Horizontal");
             _input.y = Input.GetAxisRaw("Vertical");
 
@@ -22,9 +24,6 @@ namespace Assets.Features.Player.Scripts
 
             _animator.SetFloat("moveX", _input.x);
             _animator.SetFloat("moveY", _input.y);
-
-            if (Input.GetKey(KeyCode.Z))
-                Interact();
         }
 
         private void Interact()
