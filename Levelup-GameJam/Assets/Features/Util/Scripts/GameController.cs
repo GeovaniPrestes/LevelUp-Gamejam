@@ -15,6 +15,8 @@ namespace Assets.Features.Util.Scripts
         [SerializeField] private PlayerAnimationController _playerController;
         private GameState _state;
 
+   
+
         void Update()
         {
             if (_state == GameState.FreeRoam)
